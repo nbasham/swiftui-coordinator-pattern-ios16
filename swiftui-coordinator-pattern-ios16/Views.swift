@@ -12,15 +12,7 @@ struct MainView: View {
         .toolbarBackground(.yellow, for: .navigationBar)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button(action: {
-                    coordinator.command(.help)
-                }, label: {
-                    HStack {
-                        Label("help", systemImage: "questionmark.circle.fill")
-                            .foregroundColor(.white)
-                            .imageScale(.large)
-                    }
-                })
+                NavButton(.help, "help", "questionmark.circle.fill", isTrailing: true)
             }
         }
     }
@@ -36,36 +28,52 @@ struct SettingsView: View {
         .navigationTitle("Settings")
         .navigationBarBackButtonHidden()
         .toolbarBackground(.visible, for: .navigationBar)
-       .toolbarBackground(.orange, for: .navigationBar)
+        .toolbarBackground(.orange, for: .navigationBar)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
-                ZStack(alignment: .trailing) {
-                    Button(action: {
-                        coordinator.command(.back)
-                    }, label: {
-                        HStack {
-                            Label("back", systemImage: "chevron.left.circle.fill")
-                                .imageScale(.large)
-                            Text("back")
-                        }
-                    })
-                }
+                NavButton(.back, "back", "chevron.left.circle.fill")
             }
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button(action: {
-                    DispatchQueue.main.async(execute: {
-                        coordinator.command(.about)
-                    })
-                }, label: {
-                    HStack {
-                        Text("about")
-                        Label("info", systemImage: "info.circle.fill")
-                            .imageScale(.large)
-                    }
-                })
+                NavButton(.about, "about", "info.circle.fill", isTrailing: true)
             }
         }
-        .foregroundColor(.white)
+    }
+}
+
+struct NavButton: View {
+    let command: Command
+    let label: String?
+    let image: String?
+    let isTrailing: Bool
+    @EnvironmentObject private var coordinator: Coordinator
+
+    init(_ command: Command, _ label: String? = nil, _ image: String? = nil, isTrailing: Bool = false) {
+        self.command = command
+        self.label = label
+        self.image = image
+        self.isTrailing = isTrailing
+    }
+
+    var body: some View {
+        Button(action: {
+            DispatchQueue.main.async(execute: {
+                coordinator.command(command)
+            })
+        }, label: {
+            HStack {
+                if let label, isTrailing {
+                    Text(label)
+                }
+                if let image {
+                    Image(systemName: image)
+                        .imageScale(.large)
+                }
+                if let label, !isTrailing {
+                    Text(label)
+                }
+            }
+            .foregroundColor(.white)
+        })
     }
 }
 
@@ -81,15 +89,7 @@ struct AboutView: View {
                 .toolbarBackground(.pink, for: .navigationBar)
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
-                        Button(action: {
-                            coordinator.dismissSheet()
-                        }, label: {
-                            HStack {
-                                Label("dismiss", systemImage: "x.circle.fill")
-                                    .imageScale(.large)
-                            }
-                        })
-                        .foregroundColor(.white)
+                        NavButton(.dismissAbout, nil, "x.circle.fill", isTrailing: true)
                     }
                 }
         }
@@ -144,15 +144,7 @@ struct HelpView: View {
             .toolbarBackground(.green, for: .navigationBar)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: {
-                        coordinator.dismissCover()
-                    }, label: {
-                        HStack {
-                            Label("dismiss", systemImage: "x.circle.fill")
-                                .imageScale(.large)
-                        }
-                    })
-                    .foregroundColor(.white)
+                    NavButton(.dismissHelp, nil, "x.circle.fill", isTrailing: true)
                 }
             }
         }

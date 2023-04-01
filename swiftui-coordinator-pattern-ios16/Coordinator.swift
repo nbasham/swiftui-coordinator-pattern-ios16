@@ -2,7 +2,7 @@ import SwiftUI
 
 ///  Comands differ from routes in that they express an intention rather than a destination and leave it to the Coordinator to determine the destination
 enum Command {
-    case about, back, help, main, settings
+    case about, back, help, main, settings, dismissHelp, dismissAbout
 }
 
 enum Page: String, Identifiable, Hashable {
@@ -35,8 +35,8 @@ class Coordinator: ObservableObject {
     private func popToRoot() { path.removeLast(path.count) }
     private func present(_ sheet: Sheet) { self.sheet = sheet }
     private func cover(_ cover: Cover) { self.cover = cover }
-    func dismissSheet() { self.sheet = nil }
-    func dismissCover() { self.cover = nil }
+    private func dismissSheet() { self.sheet = nil }
+    private func dismissCover() { self.cover = nil }
 
     init() {
         print("Coordinator init'd")
@@ -58,6 +58,10 @@ class Coordinator: ObservableObject {
                 push(.main)
             case .settings:
                 push(.settings)
+            case .dismissAbout:
+                dismissSheet()
+            case .dismissHelp:
+                dismissCover()
         }
     }
 
