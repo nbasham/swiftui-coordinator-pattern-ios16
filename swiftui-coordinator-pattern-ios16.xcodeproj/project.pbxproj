@@ -17,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		204DF84F29D8E106003A5200 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		20AFF9E629D898A100BD2855 /* swiftui-coordinator-pattern-ios16.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "swiftui-coordinator-pattern-ios16.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		20AFF9E929D898A100BD2855 /* swiftui_coordinator_pattern_ios16App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = swiftui_coordinator_pattern_ios16App.swift; sourceTree = "<group>"; };
 		20AFF9EB29D898A100BD2855 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -41,6 +42,7 @@
 		20AFF9DD29D898A100BD2855 = {
 			isa = PBXGroup;
 			children = (
+				204DF84F29D8E106003A5200 /* README.md */,
 				20AFF9E829D898A100BD2855 /* swiftui-coordinator-pattern-ios16 */,
 				20AFF9E729D898A100BD2855 /* Products */,
 			);
