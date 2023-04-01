@@ -11,9 +11,7 @@ struct MainView: View {
         .toolbarBackground(.visible, for: .navigationBar)
         .toolbarBackground(.yellow, for: .navigationBar)
         .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                NavButton(.help, "help", "questionmark.circle.fill", isTrailing: true)
-            }
+            CommandToolBarItem(command: .help, label: "help", image: "questionmark.circle.fill", isTrailing: true)
         }
     }
 }
@@ -30,50 +28,59 @@ struct SettingsView: View {
         .toolbarBackground(.visible, for: .navigationBar)
         .toolbarBackground(.orange, for: .navigationBar)
         .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
-                NavButton(.back, "back", "chevron.left.circle.fill")
-            }
-            ToolbarItem(placement: .navigationBarTrailing) {
-                NavButton(.about, "about", "info.circle.fill", isTrailing: true)
-            }
+            CommandToolBarItem(command: .back, label: "back", image: "chevron.left.circle.fill")
+            CommandToolBarItem(command: .about, label: "about", image: "info.circle.fill", isTrailing: true)
         }
     }
 }
 
-struct NavButton: View {
+struct CommandToolBarItem: ToolbarContent {
     let command: Command
     let label: String?
     let image: String?
-    let isTrailing: Bool
-    @EnvironmentObject private var coordinator: Coordinator
+    var isTrailing: Bool = false
 
-    init(_ command: Command, _ label: String? = nil, _ image: String? = nil, isTrailing: Bool = false) {
-        self.command = command
-        self.label = label
-        self.image = image
-        self.isTrailing = isTrailing
+    var body: some ToolbarContent {
+        ToolbarItem(placement: isTrailing ? .navigationBarTrailing : .navigationBarLeading) {
+            ToolbarButton(command, label, image, isTrailing)
+        }
     }
 
-    var body: some View {
-        Button(action: {
-            DispatchQueue.main.async(execute: {
-                coordinator.command(command)
+    struct ToolbarButton: View {
+        let command: Command
+        let label: String?
+        let image: String?
+        let isTrailing: Bool
+        @EnvironmentObject private var coordinator: Coordinator
+
+        init(_ command: Command, _ label: String? = nil, _ image: String? = nil, _ isTrailing: Bool = false) {
+            self.command = command
+            self.label = label
+            self.image = image
+            self.isTrailing = isTrailing
+        }
+
+        var body: some View {
+            Button(action: {
+                DispatchQueue.main.async(execute: {
+                    coordinator.command(command)
+                })
+            }, label: {
+                HStack {
+                    if let label, isTrailing {
+                        Text(label)
+                    }
+                    if let image {
+                        Image(systemName: image)
+                            .imageScale(.large)
+                    }
+                    if let label, !isTrailing {
+                        Text(label)
+                    }
+                }
+                .foregroundColor(.white)
             })
-        }, label: {
-            HStack {
-                if let label, isTrailing {
-                    Text(label)
-                }
-                if let image {
-                    Image(systemName: image)
-                        .imageScale(.large)
-                }
-                if let label, !isTrailing {
-                    Text(label)
-                }
-            }
-            .foregroundColor(.white)
-        })
+        }
     }
 }
 
@@ -88,9 +95,7 @@ struct AboutView: View {
                 .toolbarBackground(.visible, for: .navigationBar)
                 .toolbarBackground(.pink, for: .navigationBar)
                 .toolbar {
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        NavButton(.dismissAbout, nil, "x.circle.fill", isTrailing: true)
-                    }
+                    CommandToolBarItem(command: .dismissAbout, label: nil, image: "x.circle.fill", isTrailing: true)
                 }
         }
     }
@@ -143,9 +148,7 @@ struct HelpView: View {
             .toolbarBackground(.visible, for: .navigationBar)
             .toolbarBackground(.green, for: .navigationBar)
             .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    NavButton(.dismissHelp, nil, "x.circle.fill", isTrailing: true)
-                }
+                CommandToolBarItem(command: .dismissHelp, label: nil, image: "x.circle.fill", isTrailing: true)
             }
         }
     }
