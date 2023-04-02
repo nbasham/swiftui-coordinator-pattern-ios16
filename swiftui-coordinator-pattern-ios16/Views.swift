@@ -82,6 +82,21 @@ struct CommandToolBarItem: ToolbarContent {
     }
 }
 
+struct CommandToolBarItem_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationStack {
+            Text("The Navigation bar should have a X button")
+                .environmentObject(Coordinator())
+                .navigationBarTitle("Message", displayMode: .inline)
+                .toolbarBackground(.visible, for: .navigationBar)
+                .toolbarBackground(.yellow, for: .navigationBar)
+                .toolbar {
+                    CommandToolBarItem(command: .dismissAbout, label: nil, image: "x.circle.fill", isTrailing: true)
+                }
+        }
+    }
+}
+
 struct AboutView: View {
     @EnvironmentObject private var coordinator: Coordinator
 
@@ -101,45 +116,17 @@ struct AboutView: View {
 
 struct HelpView: View {
     @EnvironmentObject private var coordinator: Coordinator
+    let message: LocalizedStringKey = """
+        **Help**
+
+        This is **where** you see *how* to do it, and if you ***goof** ~~how not to do it~~
+        `Monospaced numbers 123` 🙃
+        """
 
     var body: some View {
         NavigationStack {
             ScrollView {
-                Text("""
-                        I need somebody
-                        (Help) not just anybody
-                        (Help) you know I need someone, help
-                        So much younger than today
-                        (I never need) I never needed anybody's help in any way
-                        (Now) but now these days are gone (these days are gone)
-                        I'm not so self assured
-                        (And now I find) now I find I've changed my mind
-                        And opened up the doors
-                        Help me if you can, I'm feeling down
-                        And I do appreciate you being 'round
-                        Help me get my feet back on the ground
-                        Won't you please, please help me
-                        In oh so many ways
-                        (My independ-) my independence seems to vanish in the haze
-                        (But) but every now and then (now and then)
-                        I feel so insecure
-                        (I know that I) I know that I just need you like
-                        I've never done before
-                        Help me if you can, I'm feeling down
-                        And I do appreciate you being 'round
-                        Help me get my feet back on the ground
-                        Won't you please, please help me
-                        When I was younger, so much younger than today
-                        I never needed anybody's help in any way
-                        (Now) but now these days are gone (these days are gone)
-                        I'm not so self assured
-                        (And now I find) now I find I've changed my mind
-                        And opened up the doors
-                        Help me if you can, I'm feeling down
-                        And I do appreciate you being 'round
-                        Help me get my feet back on the ground
-                        Won't you please, please help me, help me, help me, ooh
-                    """)
+                Text(message)
             }
             .padding()
             .navigationTitle("Help")
