@@ -13,15 +13,15 @@ class Coordinator: ObservableObject {
         }
     }
     @Published var sheet: Sheet?
-    @Published var cover: Cover?
+    @Published var fullscreen: Fullscreen?
 
     private func push(_ page: Page) { path.append(page) }
     private func pop() { path.removeLast() }
     private func popToRoot() { path.removeLast(path.count) }
     private func present(_ sheet: Sheet) { self.sheet = sheet }
-    private func cover(_ cover: Cover) { self.cover = cover }
+    private func fullscreen(_ fullscreen: Fullscreen) { self.fullscreen = fullscreen }
     private func dismissSheet() { self.sheet = nil }
-    private func dismissCover() { self.cover = nil }
+    private func dismissFullscreen() { self.fullscreen = nil }
 
     init() {
         print("Coordinator init'd")
@@ -38,7 +38,7 @@ class Coordinator: ObservableObject {
             case .back:
                 pop()
             case .help:
-                cover(.help)
+                fullscreen(.help)
             case .main:
                 push(.main)
             case .settings:
@@ -46,7 +46,7 @@ class Coordinator: ObservableObject {
             case .dismissAbout:
                 dismissSheet()
             case .dismissHelp:
-                dismissCover()
+                dismissFullscreen()
         }
     }
 
@@ -69,8 +69,8 @@ class Coordinator: ObservableObject {
     }
 
     @ViewBuilder
-    func build(cover: Cover) -> some View {
-        switch cover {
+    func build(fullscreen: Fullscreen) -> some View {
+        switch fullscreen {
             case .help:
                 HelpView()
         }
@@ -88,7 +88,7 @@ extension Coordinator {
         var id: String { rawValue }
     }
 
-    enum Cover: String, Identifiable, Hashable {
+    enum Fullscreen: String, Identifiable, Hashable {
         case help
         var id: String { rawValue }
     }
