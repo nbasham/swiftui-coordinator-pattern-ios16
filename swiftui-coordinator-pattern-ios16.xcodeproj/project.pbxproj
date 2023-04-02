@@ -14,6 +14,7 @@
 		20AFF9F829D898DC00BD2855 /* CoordinatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20AFF9F729D898DC00BD2855 /* CoordinatorView.swift */; };
 		20AFF9FA29D8990300BD2855 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20AFF9F929D8990300BD2855 /* Coordinator.swift */; };
 		20AFF9FC29D8995400BD2855 /* Views.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20AFF9FB29D8995400BD2855 /* Views.swift */; };
+		4293B92A29D905EC00519B93 /* CoordinatorJB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4293B92929D905EC00519B93 /* CoordinatorJB.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		20AFF9F729D898DC00BD2855 /* CoordinatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorView.swift; sourceTree = "<group>"; };
 		20AFF9F929D8990300BD2855 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		20AFF9FB29D8995400BD2855 /* Views.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Views.swift; sourceTree = "<group>"; };
+		4293B92929D905EC00519B93 /* CoordinatorJB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorJB.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				20AFF9EB29D898A100BD2855 /* ContentView.swift */,
 				20AFF9F929D8990300BD2855 /* Coordinator.swift */,
 				20AFF9F729D898DC00BD2855 /* CoordinatorView.swift */,
+				4293B92929D905EC00519B93 /* CoordinatorJB.swift */,
 				20AFF9FB29D8995400BD2855 /* Views.swift */,
 				20AFF9ED29D898A300BD2855 /* Assets.xcassets */,
 				20AFF9EF29D898A300BD2855 /* Preview Content */,
@@ -150,6 +153,7 @@
 			files = (
 				20AFF9FA29D8990300BD2855 /* Coordinator.swift in Sources */,
 				20AFF9EC29D898A100BD2855 /* ContentView.swift in Sources */,
+				4293B92A29D905EC00519B93 /* CoordinatorJB.swift in Sources */,
 				20AFF9F829D898DC00BD2855 /* CoordinatorView.swift in Sources */,
 				20AFF9FC29D8995400BD2855 /* Views.swift in Sources */,
 				20AFF9EA29D898A100BD2855 /* swiftui_coordinator_pattern_ios16App.swift in Sources */,
