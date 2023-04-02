@@ -1,6 +1,6 @@
 import SwiftUI
 
-///  Comands differ from routes in that they express an intention rather than a destination and leave it to the Coordinator to determine the destination
+///  Commands differ from routes in that they express an intention rather than a destination and leave it to the Coordinator to determine the destination
 enum Command {
     case about, back, help, main, settings, dismissHelp, dismissAbout
 }
