@@ -5,21 +5,6 @@ enum Command {
     case about, back, help, main, settings, dismissHelp, dismissAbout
 }
 
-enum Page: String, Identifiable, Hashable {
-    case main, settings
-    var id: String { rawValue }
-}
-
-enum Sheet: String, Identifiable, Hashable {
-    case about
-    var id: String { rawValue }
-}
-
-enum Cover: String, Identifiable, Hashable {
-    case help
-    var id: String { rawValue }
-}
-
 @MainActor
 class Coordinator: ObservableObject {
     @Published var path = NavigationPath() {
@@ -89,5 +74,22 @@ class Coordinator: ObservableObject {
             case .help:
                 HelpView()
         }
+    }
+}
+
+extension Coordinator {
+    enum Page: String, Identifiable, Hashable {
+        case main, settings
+        var id: String { rawValue }
+    }
+
+    enum Sheet: String, Identifiable, Hashable {
+        case about
+        var id: String { rawValue }
+    }
+
+    enum Cover: String, Identifiable, Hashable {
+        case help
+        var id: String { rawValue }
     }
 }

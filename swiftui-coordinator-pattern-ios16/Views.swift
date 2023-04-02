@@ -62,9 +62,7 @@ struct CommandToolBarItem: ToolbarContent {
 
         var body: some View {
             Button(action: {
-                DispatchQueue.main.async(execute: {
-                    coordinator.command(command)
-                })
+                coordinator.command(command)
             }, label: {
                 HStack {
                     if let label, isTrailing {
